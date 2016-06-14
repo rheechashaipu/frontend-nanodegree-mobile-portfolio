@@ -502,10 +502,20 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
+
+
+  //I noticed that there were four numbers constantly being calculated so I moved the four repeated numbers to an array.
+  //note: Thanks to Udacity forums: https://discussions.udacity.com/t/pizza-site-in-need-of-a-hint/161751/3
+
+  phaseList = []
+
+  for (var f = 0; f < 5; f++) {
+    phaseList.push(Math.sin((document.body.scrollTop / 1250) + (f % 5)))
+  }
+  //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phaseList[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -525,7 +535,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 25; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
