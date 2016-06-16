@@ -450,10 +450,15 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    //I saw that randomPizzaContainer was being referred to over and over again, so I stored the document query in a variable called changePizzaContainer
+    var changePizzaContainer = document.getElementsByClassName("randomPizzaContainer");
+
+    //Variables dx and newwidth were taken out of the for loop. I noticed dx and newwidth were variables that did not need to be repeated, only "passed into,: the for loop.
+    var dx = determineDx(changePizzaContainer[0], size);
+    var newwidth = changePizzaContainer[0].offsetWidth + dx + 'px';
+
+    for (var i = 0; i < changePizzaContainer.length; i++) {
+      changePizzaContainer[i].style.width = newwidth;
     }
   }
 
@@ -508,14 +513,14 @@ function updatePositions() {
   //I noticed that there were four numbers constantly being calculated so I moved the four repeated numbers to an array.
   //note: Thanks to Udacity forums: https://discussions.udacity.com/t/pizza-site-in-need-of-a-hint/161751/3
 
-  phaseList = []
+  phaseArray = [];
 
   for (var f = 0; f < 5; f++) {
-    phaseList.push(Math.sin((document.body.scrollTop / 1250) + (f % 5)))
+    phaseArray.push(Math.sin((document.body.scrollTop / 1250) + (f % 5)))
   }
   //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
   for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phaseList[i%5] + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phaseArray[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -532,6 +537,8 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+
+//I changed the for loop to limit to 25 pizzas. Initially the for loop limit ran to 200 pizzas, but not all the pizzas were actually showing up.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
