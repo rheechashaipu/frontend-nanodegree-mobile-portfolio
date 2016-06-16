@@ -6,6 +6,26 @@ The stock main.js file alongside other helpful advice can be found here: https:/
 
 -----
 
+How to inspect the site on a local server:
+
+1) Open up terminal and change directory to the project repository you want to view. The "dist" folder holds the optimized and minified code while the "src" folder holds the optimized code (with comments) that hasn't been minified.
+
+2) In the repository you're viewing, install ngrok. You can view additional instructions and the source for ngrok here: https://ngrok.com/download 
+
+Once ngrok is installed you may view various ngrok commands by typing "ngrok help"
+
+3) After installing ngrok, open up another terminal (you should have two terminal windows up) and change its current working directory to the repository in which you installed ngrok. In this newly opened terminal, enter command "python -m SimpleHTTPServer 8080"
+
+4) In the other terminal, enter "./ngrok http 8080"
+
+You should see some output in the terminal displaying "Tunnel Status" as "online" alongside other details such as "Version"and "Region."
+
+You will see a couple links prefixed with http:// and https://
+
+Copy and paste either of those links to your web browser to view the site.
+
+-----
+
 Steps taken to make the site perform at 60fps, changes made to views/main.js:
 
 1) Open the html page in Chromium (or Chrome Canary) or normal up-to-date Google Chrome and inspect the site in dev tools. 
@@ -17,6 +37,8 @@ Steps taken to make the site perform at 60fps, changes made to views/main.js:
 4) In the updatePositions function, located around line 506, I took five values there were constantly being recalculated and moved them into an array (aka list). 
 
 5) Replaced queryselctor methods with getClassName methods.
+
+-----
 
 Steps taken to make the site generate new pizza sizes within 5 ms:
 
