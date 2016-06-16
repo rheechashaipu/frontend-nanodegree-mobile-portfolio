@@ -453,7 +453,7 @@ var resizePizzas = function(size) {
     //I saw that randomPizzaContainer was being referred to over and over again, so I stored the document query in a variable called changePizzaContainer
     var changePizzaContainer = document.getElementsByClassName("randomPizzaContainer");
 
-    //Variables dx and newwidth were taken out of the for loop. I noticed dx and newwidth were variables that did not need to be repeated, only "passed into,: the for loop.
+    //Variables dx and newwidth were taken out of the for loop. I noticed dx and newwidth were variables that did not need to be repeated, only "passed into, :the for loop.
     var dx = determineDx(changePizzaContainer[0], size);
     var newwidth = changePizzaContainer[0].offsetWidth + dx + 'px';
 
